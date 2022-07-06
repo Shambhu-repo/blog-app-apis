@@ -1,0 +1,23 @@
+Video : 4:00 hr - > https://www.youtube.com/watch?v=Uh-N_6Lccr4&t=7301s
+
+
+how to install lombok in eclipse or spring suite ide :
+1st: download - > lombok jar from google
+2nd:  copy jar -- > and bring it to where eclipse or spring suite is - > open eclipse or spring suite _- > paste lombook
+- > go to command line with path of eclipse - > run command - > java -jar lombok.jar - > window open - > now aging chose path for sts or
+eclipse - > specify location - > 
+
+
+
+Today : in ServiceImp - > userServiceImpl.java    -- > time 2:40 minute
+
+
+
+How to using model mapper : it is used to transfer the data from one object to another object : need to use dependency: ModelMapper
+
+- - > userdata validation process: need to add use dependency (spring-boot-starter-validation)
+Basics of validation: 
+-> java bean is validated with JSR 380 knows as Bean validation 2.0
+Hibernate Validator is a implementation fo validation api
+  -- > the bean which we are using if valid data does not come then this bean will not take those properties as valid 
+  like : if user's properties is not according to requirement then user class bean does not accept the data comming to its properties
