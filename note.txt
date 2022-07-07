@@ -1,4 +1,4 @@
-Video : 4:00 hr - > https://www.youtube.com/watch?v=Uh-N_6Lccr4&t=7301s
+Video :  - > https://www.youtube.com/watch?v=Uh-N_6Lccr4&t=7301s
 
 
 how to install lombok in eclipse or spring suite ide :
@@ -9,7 +9,7 @@ eclipse - > specify location - >
 
 
 
-Today : in ServiceImp - > userServiceImpl.java    -- > time 2:40 minute
+Today : in ServiceImp - > userServiceImpl.java    -- > time 6:00 hr minute
 
 
 
@@ -25,3 +25,11 @@ Hibernate Validator is a implementation fo validation api
   -> for email or anything taht comes from userdto class - > we have used @notnull @Size --> now this annotation will validate the
      field and only let go through code -- > if not up to standard input throws - > MethodArgumentNotValidException 
      -> to handle this i have used exception package and GLoblaExceptionHandler calss - > with methodArgumentNotValidException() 
+     
+     
+     
+     -> Pagination in jpa - > 
+     page size -> how many data can contain
+     pageNumber -> give number to each page
+     sort -> we can sort it by any one of the field
+     

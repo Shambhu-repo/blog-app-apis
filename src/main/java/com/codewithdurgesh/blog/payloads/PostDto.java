@@ -11,15 +11,21 @@ public class PostDto {
 	PostDto(){
 		
 	}
-	
+	private Integer postId;
+	public Integer getPostId() {
+		return postId;
+	}
+	public void setPostId(Integer postId) {
+		this.postId = postId;
+	}
 	private String title;
 	private String content;
 	private String imageName;
 	private Date addedDate;
 	private CategoryDto category;
-	//pirvate Category category
+	//private Category category;   -> error can not convert from category to categoryDto
 	private UserDto user;
-	//private User user
+	//private User user;  -> error can not convert from category to categoryDto
 	
 	
 	public String getImageName() {
