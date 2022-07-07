@@ -31,9 +31,11 @@ public class Post {
 	private Date addDate;
 	
 	 @ManyToOne
+	 @JoinColumn(name ="user_Id")
 	private User user;
 	
 	 @ManyToOne
+	 @JoinColumn(name ="category_Id")
 	private Category category;
 	
 	
