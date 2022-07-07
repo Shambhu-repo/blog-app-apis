@@ -21,3 +21,7 @@ Basics of validation:
 Hibernate Validator is a implementation fo validation api
   -- > the bean which we are using if valid data does not come then this bean will not take those properties as valid 
   like : if user's properties is not according to requirement then user class bean does not accept the data comming to its properties
+  
+  -> for email or anything taht comes from userdto class - > we have used @notnull @Size --> now this annotation will validate the
+     field and only let go through code -- > if not up to standard input throws - > MethodArgumentNotValidException 
+     -> to handle this i have used exception package and GLoblaExceptionHandler calss - > with methodArgumentNotValidException() 

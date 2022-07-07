@@ -1,10 +1,16 @@
 package com.codewithdurgesh.blog.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -17,11 +23,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User {
-	//@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	//@Column(name="user_name", nullable=false , length=100)
+	@Column(name="user_name", nullable=false , length=100)
 	private String name;
 	
 	
@@ -29,15 +35,25 @@ public class User {
 	private String password;
 	private String about;
 	
-	     @Id
-		@GeneratedValue(strategy=GenerationType.AUTO)
+	  @OneToMany(mappedBy="user" , cascade =CascadeType.ALL, fetch= FetchType.LAZY)
+	  private List<Post> posts = new ArrayList<>(); // user to post : one to many (one user can post many post)
+	
+	     
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+		
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@Column(name="user_name" ,nullable = false, length=100)
+
 	public String getName() {
 		return name;
 	}
