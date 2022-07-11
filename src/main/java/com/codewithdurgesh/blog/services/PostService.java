@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.codewithdurgesh.blog.entities.Post;
 import com.codewithdurgesh.blog.payloads.PostDto;
+import com.codewithdurgesh.blog.payloads.PostResponse;
 
 public interface PostService {
 	
@@ -21,7 +22,14 @@ public interface PostService {
 	
 	List<PostDto> getPsotByUser(Integer userId);
 	
-	List<Post> searchPosts(String keyword);
+	List<PostDto> searchPosts(String keyword);
 	
-	List<PostDto> getAllPostByPagination(Integer pageNumber , Integer pageSize);
+	 PostResponse getAllPostByPagination(Integer pageNumber , Integer pageSize);
+	 
+	 PostResponse getAllPostByPaginationWithSorting(Integer pageNumber , Integer pageSize, String sortBy);
+	 
+	 PostResponse getAllPostByPaginationWithSortingAndDirection(Integer pageNumber , Integer pageSize, String sortBy, String direction);
+	 
+	 
+	 
 }

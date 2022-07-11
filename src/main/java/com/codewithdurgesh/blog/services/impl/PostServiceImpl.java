@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.codewithdurgesh.blog.entities.Category;
@@ -16,6 +17,7 @@ import com.codewithdurgesh.blog.entities.Post;
 import com.codewithdurgesh.blog.entities.User;
 import com.codewithdurgesh.blog.exceptions.ResourceNotFoundException;
 import com.codewithdurgesh.blog.payloads.PostDto;
+import com.codewithdurgesh.blog.payloads.PostResponse;
 import com.codewithdurgesh.blog.repositories.CategoryRepo;
 import com.codewithdurgesh.blog.repositories.PostRepo;
 import com.codewithdurgesh.blog.repositories.UserRepo;
@@ -52,17 +54,17 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostDto updatePost(PostDto postDto, Integer postId) {
-		Post post = postRepo.findById(postId).orElseThrow(()->new ResourceNotFoundException("User", "UserId", postId));
+		Post post = postRepo.findById(postId).orElseThrow(()->new ResourceNotFoundException("post", "postId", postId));
 		//Category category =categroryrepo.findById(categoryId).orElseThrow(()->new ResourceNotFoundException("User", "UserId", categoryId));
 	//Post post=	modelmapper.map(postDto, Post.class);
 	post.setImageName(postDto.getImageName());
-	post.setAddDate(new Date());
+	post.setAddDate(postDto.getAddedDate());
 	//post.setUser(user);
 	//post.setCategory(category);
 	post.setTitle(postDto.getTitle());
 	post.setContent(postDto.getContent());
-	Post newpost = postRepo.save(post);
-	PostDto newpostDto = modelmapper.map(post, PostDto.class);
+	Post updatedpost = postRepo.save(post);
+	PostDto newpostDto = modelmapper.map(updatedpost, PostDto.class);
 	return newpostDto;
 	}
 
@@ -103,18 +105,79 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> searchPosts(String keyword) {
-		
-		return null;
+	public List<PostDto> searchPosts(String keyword) {
+		//List<Post>  posts= postRepo.findByTitleContaining("%"keyword"%"); - > this is if we use Query annotation in PostRepo class
+		List<Post>  posts= postRepo.findByTitleContaining(keyword);
+		List<PostDto> postDtos = posts.stream().map((post)-> modelmapper.map(post, PostDto.class)).collect(Collectors.toList());
+		return postDtos;
 	}
 
 	@Override
-	public List<PostDto> getAllPostByPagination(Integer pageNumber, Integer pageSize) {
+	public PostResponse getAllPostByPagination(Integer pageNumber, Integer pageSize) {
 		Pageable p = PageRequest.of(pageNumber, pageSize);
-		Page<Post> pagePost = postRepo.findAll(p);
+		Page<Post> pagePost = postRepo.findAll(p); //it will have all content or all pages
 		List<Post> allPosts = pagePost.getContent();
 		List<PostDto> postDtos= allPosts.stream().map((post)->modelmapper.map(post, PostDto.class)).collect(Collectors.toList());
-		return postDtos;
+		
+		PostResponse postResponse = new PostResponse();
+		postResponse.setContent(postDtos);
+		postResponse.setPageNumber(pagePost.getNumber());
+		postResponse.setPageSize(pagePost.getSize());
+		postResponse.setTotalElements(pagePost.getTotalElements());
+		postResponse.setTotalPages(pagePost.getTotalPages());
+		postResponse.setLastPage(pagePost.isLast());
+		return postResponse;
+	}
+
+	@Override
+	public PostResponse getAllPostByPaginationWithSorting(Integer pageNumber, Integer pageSize, String sortBy) {
+		
+		 Pageable p = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
+	      //Pageable p = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());   //for descending order
+		
+		
+		Page<Post> pagePost = postRepo.findAll(p); //it will have all content or all pages
+		List<Post> allPosts = pagePost.getContent();
+		List<PostDto> postDtos= allPosts.stream().map((post)->modelmapper.map(post, PostDto.class)).collect(Collectors.toList());
+		
+		PostResponse postResponse = new PostResponse();
+		postResponse.setContent(postDtos);
+		postResponse.setPageNumber(pagePost.getNumber());
+		postResponse.setPageSize(pagePost.getSize());
+		postResponse.setTotalElements(pagePost.getTotalElements());
+		postResponse.setTotalPages(pagePost.getTotalPages());
+		postResponse.setLastPage(pagePost.isLast());
+		return postResponse;	
+		
+	}
+
+	@Override
+	public PostResponse getAllPostByPaginationWithSortingAndDirection(Integer pageNumber, Integer pageSize,
+			String sortBy, String direction) {
+		
+		Sort sort = (direction.equalsIgnoreCase("asc"))?Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
+		
+		//ternary 
+		/*if(direction.equalsIgnoreCase("asc")) {
+			sort = Sort.by(sortBy).ascending();
+		}else {
+			sort = Sort.by(sortBy).descending();
+		} */
+Pageable p = PageRequest.of(pageNumber, pageSize, sort);  
+		
+		Page<Post> pagePost = postRepo.findAll(p); //it will have all content or all pages
+		List<Post> allPosts = pagePost.getContent();
+		List<PostDto> postDtos= allPosts.stream().map((post)->modelmapper.map(post, PostDto.class)).collect(Collectors.toList());
+		
+		PostResponse postResponse = new PostResponse();
+		postResponse.setContent(postDtos);
+		postResponse.setPageNumber(pagePost.getNumber());
+		postResponse.setPageSize(pagePost.getSize());
+		postResponse.setTotalElements(pagePost.getTotalElements());
+		postResponse.setTotalPages(pagePost.getTotalPages());
+		postResponse.setLastPage(pagePost.isLast());
+		return postResponse;	
+				
 	}
 
 }

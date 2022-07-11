@@ -28,8 +28,12 @@ Hibernate Validator is a implementation fo validation api
      
      
      
-     -> Pagination in jpa - > 
+     -> Pagination in jpa - > method : getAllPostByPagination() -> i have used this method to do pagination in post
      page size -> how many data can contain
      pageNumber -> give number to each page
      sort -> we can sort it by any one of the field
      
+   ###how to upload picture in api or microservices###
+   fileservice -> fileservinceimpl -> uploadimage (post controller)
+   need to watch and learn from durgesh how to upload and download image in springboot
+   
