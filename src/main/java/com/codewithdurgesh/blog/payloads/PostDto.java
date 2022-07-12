@@ -1,8 +1,11 @@
 package com.codewithdurgesh.blog.payloads;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.codewithdurgesh.blog.entities.Category;
+import com.codewithdurgesh.blog.entities.Comment;
 import com.codewithdurgesh.blog.entities.User;
 
 public class PostDto {
@@ -27,9 +30,27 @@ public class PostDto {
 	private UserDto user;
 	//private User user;  -> error can not convert from category to categoryDto
 	
+	private Set<Comment> comments = new HashSet<Comment>();
+	
+	/*
+	private Set<CommentDto> comments = new HashSet<CommentDto>();
+	
+	
+	public Set<CommentDto> getComments() {
+		return comments;
+	}
+	public void setComments(Set<CommentDto> comments) {
+		this.comments = comments;
+	}   */  
 	
 	public String getImageName() {
 		return imageName;
+	}
+	public Set<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 	public void setImageName(String imageName) {
 		this.imageName = imageName;

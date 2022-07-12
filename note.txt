@@ -1,5 +1,13 @@
 Video :  - > https://www.youtube.com/watch?v=Uh-N_6Lccr4&t=7301s
 
+problem :
+in comment : can not post comment content in database. But content id is being inserted : need to check out
+
+
+
+Task:
+1. need to add user in comment to know who is the one who commented on the post
+
 
 how to install lombok in eclipse or spring suite ide :
 1st: download - > lombok jar from google
@@ -36,4 +44,9 @@ Hibernate Validator is a implementation fo validation api
    ###how to upload picture in api or microservices###
    fileservice -> fileservinceimpl -> uploadimage (post controller)
    need to watch and learn from durgesh how to upload and download image in springboot
+   
+   
+   #how to secure our public api  -> Spring security
+   
+   
    

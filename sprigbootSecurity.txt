@@ -1,0 +1,26 @@
+Springboot security in api: 
+1. role base authentication:->
+
+1st: add dependency : <dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				</dependency>
+How it works :  -> this dependency makes all the api private and generate security password and create form based authentication-> we can see it in console 
+                   user = "user"   password: can get from console
+                   
+                   
+                   basic authentication: 
+                   *******************
+        -> how we can change spring security form based or web based security to api based security
+        Ans: we ue java and make configuration -> annotation in class: @Configuration  ,@EnableWebSecurity
+        
+        extention: extends WebSecurityConfigurerAdapter
+        and ->         method @Override
+	protected void configure(HttpSecurity http) throws Exception
+	
+	
+	problem: in this basic authentication -> we need to send every time user and password . so to get rid of this we uee JWT Authentication
+	
+
+                 
+     
